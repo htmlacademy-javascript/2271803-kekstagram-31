@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм»
 
 * Студент: [Алена Чернова](https://up.htmlacademy.ru/javascript/31/user/2271803).
-* Наставник: `Неизвестно`.
+* Наставник: `Антон Попов`(https://htmlacademy.ru/profile/joker).
 
 ---
 
