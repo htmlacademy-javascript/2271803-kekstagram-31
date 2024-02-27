@@ -3,16 +3,15 @@
  * @param {integer} maxLength - максимальная длина строки
  * @return {boolean} - истина, если длина строки не превышает maxLength
  */
-const checkStringLength = (string, maxLength) => {
-  return string.length <= maxLength;
-};
+const checkStringLength = (string, maxLength) => string.length <= maxLength;
 
 checkStringLength('проверяемая строка', 20); // true
 checkStringLength('проверяемая строка', 18); // true
 checkStringLength('проверяемая строка', 10); // false
 
 /*
-Функция для проверки, является ли строка палиндромом. Палиндром — это слово или фраза, которые одинаково читаются и слева направо и справа налево. Например:
+Функция для проверки, является ли строка палиндромом. Палиндром — это слово или фраза, которые одинаково читаются и слева направо и справа налево.
+Например:
 
 // Строка является палиндромом
 имяФункции('топот'); // true
@@ -26,3 +25,7 @@ checkStringLength('проверяемая строка', 10); // false
 // Это палиндром
 имяФункции('Лёша на полке клопа нашёл '); // true
 */
+
+const checkPalindrome = (string) => {
+  const newString = string.replaceAll(' ', '').toUpperCase();
+}
