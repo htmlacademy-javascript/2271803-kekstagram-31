@@ -1,7 +1,7 @@
 /**Функция для проверки длины строки
  * @param {string} string - строка для проверки
  * @param {integer} maxLength - максимальная длина строки
- * @return {boolean} - истина, если длина строки не превышает maxLength
+ * @returns {boolean} - истина, если длина строки не превышает maxLength
  */
 const checkStringLength = (string, maxLength) => string.length <= maxLength;
 
@@ -9,23 +9,16 @@ checkStringLength('проверяемая строка', 20); // true
 checkStringLength('проверяемая строка', 18); // true
 checkStringLength('проверяемая строка', 10); // false
 
-/*
-Функция для проверки, является ли строка палиндромом. Палиндром — это слово или фраза, которые одинаково читаются и слева направо и справа налево.
-Например:
+/**Функция для проверки, является ли строка палиндромом
+ * @param {string} string - строка для проверки
+ * @returns {boolean} - истина, если палиндром
+ */
+const isPalindrome = (string = '') => {
+  const newString = string.replaceAll(' ', '').toLowerCase();
 
-// Строка является палиндромом
-имяФункции('топот'); // true
-// Несмотря на разный регистр, тоже палиндром
-имяФункции('ДовОд'); // true
-// Это не палиндром
-имяФункции('Кекс');  // false
-
-Если хотите усложнить задание, предусмотрите случай, когда в строке встречаются пробелы. Они не должны учитываться при проверке!
-
-// Это палиндром
-имяФункции('Лёша на полке клопа нашёл '); // true
-*/
-
-const checkPalindrome = (string) => {
-  const newString = string.replaceAll(' ', '').toUpperCase();
+  let reverseString = '';
+  for (let i=string.length - 1; i >= 0; i--) {
+    reverseString = reverseString + string[i];
+  }
+  return string === reverseString;
 }
