@@ -14,11 +14,13 @@ checkStringLength('проверяемая строка', 10); // false
  * @returns {boolean} - истина, если палиндром
  */
 const isPalindrome = (string = '') => {
-  const newString = string.replaceAll(' ', '').toLowerCase();
+  string = string.replaceAll(' ', '').toLowerCase();
 
   let reverseString = '';
-  for (let i=string.length - 1; i >= 0; i--) {
+  for (let i = string.length - 1; i >= 0; i--) {
     reverseString = reverseString + string[i];
   }
   return string === reverseString;
-}
+};
+
+isPalindrome();
