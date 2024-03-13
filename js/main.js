@@ -54,3 +54,7 @@ function createObject() {
     }
   });
 }
+
+//Создание массива из 25 сгенерированных объектов
+// eslint-disable-next-line no-unused-vars
+const userComments = Array.from({length: numObject}, createObject);
