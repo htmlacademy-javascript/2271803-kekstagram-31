@@ -1,14 +1,13 @@
-/**
- * Функция для генерации случайного числа
- * @param {integer} min - Нижняя граница диапазона
- * @param {integer} max - Верхняя граница диапазона
- * @returns {integer} - Случайное число из диапозона
- */
-function getRandomInteger(min,max) {
-  const lower = Math.ceil(Math.min(Math.abs(min), Math.abs(max)));
-  const upper = Math.floor(Math.max(Math.abs(min), Math.abs(max)));
-  const result = Math.random() * (upper - lower + 1) + lower;
-  return Math.floor(result);
-}
+import {DEBOUNCE_DELAY} from './settings.js';
 
-export {getRandomInteger};
+const debounce = (callback, timeoutDelay = DEBOUNCE_DELAY) => {
+  let timeoutId;
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
+};
+
+const isEscapeKey = (evt) => evt.key === 'Escape';
+
+export {debounce, isEscapeKey};
