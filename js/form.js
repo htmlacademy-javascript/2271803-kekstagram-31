@@ -1,20 +1,21 @@
 import {isEscapeKey} from './util.js';
-import {MAX_HASHTAGS, REGEX, MAX_COMMENT_LENGTH} from './settings.js';
+import {MAX_HASHTAGS, REGEX, MAX_COMMENT_LENGTH, BUTTON_TEXT_SHOW_TIME} from './settings.js';
 import {onScaleChange} from './photo-scaling.js';
 import {onEffectSelect, sliderContainer, uploadedImage} from './slider.js';
 import {sendData} from './api.js';
 import {showSuccessAlert, showErrorAlert} from './alerts.js';
 import {onFileUpload, uploadedImageInput} from './upload-photo.js';
+import {body} from './popup.js';
 
 const uploadForm = document.querySelector('.img-upload__form');
-const overlay = document.querySelector('.img-upload__overlay');
-const overlayCloseButton = document.querySelector('.img-upload__cancel');
-const hashtagInput = document.querySelector('.text__hashtags');
-const imageDescriptionInput = document.querySelector('.text__description');
-const zoomOutPhoto = document.querySelector('.scale__control--smaller');
-const zoomPhoto = document.querySelector('.scale__control--bigger');
-const effectsRadio = document.querySelector('.effects__list');
-const submitButton = document.querySelector('.img-upload__submit');
+const overlay = uploadForm.querySelector('.img-upload__overlay');
+const overlayCloseButton = overlay.querySelector('.img-upload__cancel');
+const hashtagInput = overlay.querySelector('.text__hashtags');
+const imageDescriptionInput = overlay.querySelector('.text__description');
+const zoomOutPhoto = overlay.querySelector('.scale__control--smaller');
+const zoomPhoto = overlay.querySelector('.scale__control--bigger');
+const effectsRadio = overlay.querySelector('.effects__list');
+const submitButton = overlay.querySelector('.img-upload__submit');
 
 const pristine = new Pristine(uploadForm, {
   classTo: 'img-upload__field-wrapper',
@@ -41,7 +42,7 @@ const onEventEscKeydown = (evt) => {
 
 const onFormOpen = () => {
   overlay.classList.remove('hidden');
-  document.body.classList.add('modal-open');
+  body.classList.add('modal-open');
   document.addEventListener('keydown', onEventEscKeydown);
   zoomOutPhoto.addEventListener('click', onScaleChange);
   zoomPhoto.addEventListener('click', onScaleChange);
@@ -53,7 +54,7 @@ function onFormHide () {
   pristine.reset();
   uploadForm.reset();
   overlay.classList.add('hidden');
-  document.body.classList.remove('modal-open');
+  body.classList.remove('modal-open');
   uploadedImage.removeAttribute('style');
   sliderContainer.classList.add('hidden');
   document.removeEventListener('keydown', onEventEscKeydown);
@@ -68,7 +69,7 @@ const onFormSubmit = (evt) => {
     toggleSubmitButton(toggleSubmitButtonSettings.unblock);
     setTimeout(() => {
       toggleSubmitButton(toggleSubmitButtonSettings.block);
-    }, 5000);
+    }, BUTTON_TEXT_SHOW_TIME);
     sendData(new FormData(evt.target))
       .then(() => {
         onFormHide();
@@ -82,14 +83,14 @@ const onFormSubmit = (evt) => {
 
 const validateHashtag = (hashtag) => REGEX.test(hashtag);
 
-const conversionHashtagsString = (string) => {
+const convertHashtagsString = (string) => {
   const newString = string.trim();
   const hashtags = newString.split(' ');
   return hashtags;
 };
 
 const isEveryHashtagValid = (hashtagsString) => {
-  const hashtags = conversionHashtagsString(hashtagsString);
+  const hashtags = convertHashtagsString(hashtagsString);
   if (!hashtags[0]) {
     return true;
   }
@@ -98,7 +99,7 @@ const isEveryHashtagValid = (hashtagsString) => {
 };
 
 const isHashtagsUnique = (hashtagsString) => {
-  const hashtags = conversionHashtagsString(hashtagsString);
+  const hashtags = convertHashtagsString(hashtagsString);
   const lowerHashtags = hashtags.map((hashtag) => hashtag.toLowerCase());
   const seenHashtag = new Set();
   for (let i = 0; i < lowerHashtags.length; i++) {
@@ -112,7 +113,7 @@ const isHashtagsUnique = (hashtagsString) => {
 };
 
 const isHashtagsArrayLengthValid = (hashtagsString) => {
-  const hashtags = conversionHashtagsString(hashtagsString);
+  const hashtags = convertHashtagsString(hashtagsString);
   return hashtags.length <= MAX_HASHTAGS;
 };
 

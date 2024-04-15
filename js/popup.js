@@ -1,5 +1,6 @@
 import {isEscapeKey} from './util.js';
 
+const body = document.querySelector('body');
 const bigPicturePopup = document.querySelector('.big-picture');
 const buttonClosePopup = document.querySelector('.big-picture__cancel');
 const commentList = bigPicturePopup.querySelector('.social__comments');
@@ -60,7 +61,7 @@ const onCommentsLoad = (evt) => {
 
 const onPopupClose = () => {
   bigPicturePopup.classList.add('hidden');
-  document.querySelector('body').classList.remove('modal-open');
+  body.classList.remove('modal-open');
   commentCount.classList.remove('hidden');
   commentLoader.classList.remove('hidden');
   document.removeEventListener('keydown', onPopupEscKeydown);
@@ -82,11 +83,11 @@ const onPopupOpen = (evt, arrayData) => {
     fillComments(object);
     fillPopup(object);
     bigPicturePopup.classList.remove('hidden');
-    document.querySelector('body').classList.add('modal-open');
+    body.classList.add('modal-open');
     buttonClosePopup.addEventListener('click', onPopupClose);
     document.addEventListener('keydown', onPopupEscKeydown);
     commentLoader.addEventListener('click', onCommentsLoad);
   }
 };
 
-export {onPopupOpen};
+export {onPopupOpen, body};

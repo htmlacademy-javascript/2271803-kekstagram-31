@@ -26,10 +26,11 @@ getData()
     photoList.addEventListener('click', (evt) => {
       onPopupOpen(evt, images);
     });
-    initValidation();
   })
   .catch(
     (err) => {
       showDataError(err.message);
     }
   );
+
+initValidation();
