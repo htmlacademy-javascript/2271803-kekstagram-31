@@ -67,9 +67,6 @@ const onFormSubmit = (evt) => {
   evt.preventDefault();
   if (pristine.validate()) {
     toggleSubmitButton(toggleSubmitButtonSettings.unblock);
-    setTimeout(() => {
-      toggleSubmitButton(toggleSubmitButtonSettings.block);
-    }, BUTTON_TEXT_SHOW_TIME);
     sendData(new FormData(evt.target))
       .then(() => {
         onFormHide();
@@ -77,7 +74,8 @@ const onFormSubmit = (evt) => {
       })
       .catch((err) => {
         showErrorAlert(err.message);
-      });
+      })
+      .finally(toggleSubmitButton);
   }
 };
 
