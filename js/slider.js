@@ -54,7 +54,7 @@ const addEffects = ({filter, min, max, start, step, unit}) => {
   });
 };
 
-const onEffectSelect = function (evt) {
+const onEffectSelect = (evt) => {
   const radioValue = evt.target.closest('.effects__radio').value;
 
   if (radioValue === 'none') {

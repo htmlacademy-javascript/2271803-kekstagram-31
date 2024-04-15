@@ -12,6 +12,7 @@ const showSuccessAlert = () => {
   document.addEventListener('click', onEventsClose);
   function onMessageRemove () {
     successMessage.remove();
+    document.removeEventListener('keydown', onEventsClose);
   }
   function onEventsClose (evt) {
     if (isEscapeKey(evt) || !successInner.contains(evt.target)) {
@@ -31,6 +32,7 @@ const showErrorAlert = () => {
   document.addEventListener('click', onEventsClose);
   function onMessageRemove () {
     errorMessage.remove();
+    document.removeEventListener('keydown', onEventsClose);
   }
   function onEventsClose (evt) {
     if (isEscapeKey(evt) || !errorInner.contains(evt.target)) {
