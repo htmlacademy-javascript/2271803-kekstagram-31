@@ -1,5 +1,5 @@
 import {isEscapeKey} from './util.js';
-import {MAX_HASHTAGS, REGEX, MAX_COMMENT_LENGTH, BUTTON_TEXT_SHOW_TIME} from './settings.js';
+import {MAX_HASHTAGS, REGEX, MAX_COMMENT_LENGTH} from './settings.js';
 import {onScaleChange} from './photo-scaling.js';
 import {onEffectSelect, sliderContainer, uploadedImage} from './slider.js';
 import {sendData} from './api.js';
