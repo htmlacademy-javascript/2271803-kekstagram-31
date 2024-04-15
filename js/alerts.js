@@ -8,17 +8,22 @@ const showSuccessAlert = () => {
   const successMessage = document.querySelector('.success');
   const successInner = document.querySelector('.success__inner');
   document.querySelector('.success__button').addEventListener('click', onMessageRemove);
-  document.addEventListener('keydown', onEventsClose);
-  document.addEventListener('click', onEventsClose);
+  document.body.addEventListener('keydown', onEventsClose);
+  document.body.addEventListener('click', onEventsClose);
   function onMessageRemove () {
     successMessage.remove();
-    document.removeEventListener('keydown', onEventsClose);
+    document.body.removeEventListener('keydown', onEventsClose);
   }
   function onEventsClose (evt) {
     if (isEscapeKey(evt) || !successInner.contains(evt.target)) {
       onMessageRemove();
     }
   }
+  document.body.addEventListener('click', (evt) => {
+    if (evt.target !== successInner && !successInner.contains(evt.target)) {
+      removeMessageHandler();
+    }
+  });
 };
 
 const showErrorAlert = () => {
@@ -28,19 +33,19 @@ const showErrorAlert = () => {
   const errorMessage = document.querySelector('.error');
   const errorInner = document.querySelector('.error__inner');
   document.querySelector('.error__button').addEventListener('click', onMessageRemove);
-  document.addEventListener('keydown', onEventsClose);
-  document.addEventListener('click', onEventsClose);
+  document.body.addEventListener('keydown', onEventsClose);
+  document.body.addEventListener('click', onEventsClose);
   function onMessageRemove () {
     errorMessage.remove();
-    document.removeEventListener('keydown', onEventsClose);
+    document.body.removeEventListener('keydown', onEventsClose);
   }
   function onEventsClose (evt) {
-    if (isEscapeKey(evt) || !errorInner.contains(evt.target)) {
-      onMessageRemove();
-    }
-  }
-};
-
+    document.body.addEventListener('click', (evt) => {
+      if (isEscapeKey(evt) || !errorInner.contains(evt.target)) {
+        onMessageRemove();
+      }
+    });
+  };
 const showDataError = () => {
   const dataErrorTemplate = document.querySelector('#data-error').content;
   const dataErrorElement = dataErrorTemplate.cloneNode(true);
